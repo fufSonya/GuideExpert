@@ -126,9 +126,8 @@ class FavoritesViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private suspend fun loadExcursionsFavorite() {
-        profileFlow.onEach {  if (it == null || it.id ==0)  handleEvent(ExcursionsFavoriteUiEvent.OnLoadFavoritesUIStateSetIdle)}
+        profileFlow.onEach { if (it == null || it.id ==0)  handleEvent(ExcursionsFavoriteUiEvent.OnLoadFavoritesUIStateSetIdle)}
             .filter { it != null && it.id !=0 }
-            .distinctUntilChanged()
             .flatMapLatest {
                 loadExcursionFavoriteUseCase()
             }.flowOn(Dispatchers.IO).collectLatest { resources ->
