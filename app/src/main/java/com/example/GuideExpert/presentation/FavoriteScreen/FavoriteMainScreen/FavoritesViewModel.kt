@@ -1,16 +1,15 @@
 package com.example.GuideExpert.presentation.FavoriteScreen.FavoriteMainScreen
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.GuideExpert.data.repository.UIResources
 import com.example.GuideExpert.domain.DeleteFavoriteExcursionUseCase
 import com.example.GuideExpert.domain.GetExcursionFavoriteUseCase
 import com.example.GuideExpert.domain.LoadExcursionFavoriteUseCase
 import com.example.GuideExpert.domain.RestoreFavoriteExcursionUseCase
 import com.example.GuideExpert.domain.SetFavoriteExcursionUseCase
 import com.example.GuideExpert.domain.models.Excursion
+import com.example.GuideExpert.domain.models.UIResources
 import com.example.GuideExpert.domain.repository.ProfileRepository
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.DeleteFavoriteExcursionState
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.DeleteFavoriteExcursionUIState
@@ -18,7 +17,7 @@ import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.RestoreF
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.RestoreFavoriteExcursionUIState
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.SetFavoriteExcursionState
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.SetFavoriteExcursionUIState
-import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.SnackbarEffect
+import com.example.GuideExpert.domain.models.SnackbarEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

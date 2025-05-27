@@ -2,6 +2,7 @@ package com.example.GuideExpert.ui.theme
 
 import android.app.Activity
 import android.os.Build
+import android.util.Log
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -41,6 +42,7 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun GuideExpertTheme(
+    isLightStatusBar: Boolean = true,
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
@@ -55,6 +57,25 @@ fun GuideExpertTheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+            if (darkTheme) {
+                Log.d("THEME","OK")
+                windowInsetsController.isAppearanceLightStatusBars = false
+            } else {
+                if (!isLightStatusBar) {
+                    windowInsetsController.isAppearanceLightStatusBars = false
+                } else {
+                    windowInsetsController.isAppearanceLightStatusBars = true
+                }
+            }
+        }
+    }
+
 
     MaterialTheme(
         colorScheme = colorScheme,

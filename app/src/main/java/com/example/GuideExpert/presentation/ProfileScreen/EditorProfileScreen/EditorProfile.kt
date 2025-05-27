@@ -3,7 +3,6 @@ package com.example.GuideExpert.presentation.ProfileScreen.EditorProfileScreen
 import android.Manifest
 import android.os.Build
 import android.util.Log
-import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -98,9 +97,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.SubcomposeAsyncImage
 import com.example.GuideExpert.R
 import com.example.GuideExpert.domain.models.Profile
-import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.SnackbarEffect
+import com.example.GuideExpert.domain.models.SnackbarEffect
 import com.example.GuideExpert.ui.theme.Shadow1
 import com.example.GuideExpert.ui.theme.Shadow2
+import com.example.GuideExpert.utils.isValidBirthday
+import com.example.GuideExpert.utils.isValidEmail
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
@@ -114,7 +115,7 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditorProfileScreen(snackbarHostState: SnackbarHostState,
-                        onNavigateToProfile: () -> Boolean,
+                        onNavigateToProfile: () -> Unit,
                         innerPaddingMain: PaddingValues,
                         viewModel: EditorProfileViewModel = hiltViewModel(),
                         scopeState: EditorProfileStateScope = rememberDefaultEditorProfileStateScope(profile = viewModel.profileFlow,
@@ -342,7 +343,7 @@ fun EditorProfileStateScope.EditorProfileContent(innerPadding: PaddingValues, )
     }
 
     Box(modifier = Modifier
-        .padding(innerPadding)
+        .padding(top = innerPadding.calculateTopPadding())
         .fillMaxSize()) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -429,6 +430,7 @@ fun EditorProfileStateScope.EditorProfileContent(innerPadding: PaddingValues, )
                 OutlinedTextField(
                     email ?: "",
                     {
+                        isErrorEmail = false
                         email = it
                         handleEvent(EditorProfileUiEvent.OnEmailChanged(it))
                     },
@@ -841,10 +843,6 @@ fun DatePickerModal(
         DatePicker(state = datePickerState)
     }
 }
-
-fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
-
-fun Long?.isValidBirthday() =  this !== null && this < Date().time
 
 
 @OptIn(ExperimentalMaterial3Api::class)

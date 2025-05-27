@@ -1,12 +1,11 @@
 package com.example.GuideExpert.presentation.ProfileScreen.YandexActivity
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.GuideExpert.data.SessionManager
-import com.example.GuideExpert.data.repository.UIResources
 import com.example.GuideExpert.domain.GetAuthTokenByYandexUseCase
+import com.example.GuideExpert.domain.models.UIResources
+import com.example.GuideExpert.domain.repository.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

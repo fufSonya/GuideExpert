@@ -1,8 +1,8 @@
 package com.example.GuideExpert.domain.impl
 
-import com.example.GuideExpert.data.repository.UIResources
 import com.example.GuideExpert.domain.DeleteAvatarProfileUseCase
 import com.example.GuideExpert.domain.models.MessageResponse
+import com.example.GuideExpert.domain.models.UIResources
 import com.example.GuideExpert.domain.repository.ProfileRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

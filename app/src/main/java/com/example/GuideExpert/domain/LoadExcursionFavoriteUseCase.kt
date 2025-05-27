@@ -1,7 +1,7 @@
 package com.example.GuideExpert.domain
 
-import com.example.GuideExpert.data.repository.UIResources
 import com.example.GuideExpert.domain.models.Excursion
+import com.example.GuideExpert.domain.models.UIResources
 import kotlinx.coroutines.flow.Flow
 
 interface LoadExcursionFavoriteUseCase {

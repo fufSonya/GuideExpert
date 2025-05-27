@@ -38,8 +38,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.SubcomposeAsyncImage
-import com.example.GuideExpert.data.repository.ProfileResources
 import com.example.GuideExpert.domain.models.Profile
+import com.example.GuideExpert.domain.models.ProfileResources
 import com.example.GuideExpert.ui.theme.Shadow1
 import com.example.GuideExpert.ui.theme.Shadow2
 import kotlinx.coroutines.flow.StateFlow

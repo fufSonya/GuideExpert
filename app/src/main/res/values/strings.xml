@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GuideExpert</string>
+    <string name="app_name">Гид Эксперт</string>
     <string name="no_excursions_found">Экскурсии не найдены</string>
     <string name="search_str">Поиск...</string>
     <string name="label_filters">Фильтры</string>
@@ -37,4 +37,14 @@
     <string name="search">Поиск</string>
     <string name="favorites">Избранное</string>
     <string name="person">Профиль</string>
+    <string name="booking">Заказать</string>
+    <string name="select_date_booking">Выберите дату:</string>
+    <string name="select_time_booking">Выберите время:</string>
+    <string name="select_count_booking">Введите количество человек:</string>
+    <string name="select_email_booking">Введите почту:</string>
+    <string name="select_phone_booking">Введите телефон:</string>
+    <string name="select_comments_booking">Дополнительная информация:</string>
+    <string name="error_date_booking">Неверно введена дата экскурсии</string>
+    <string name="send_request_booking">Отправить</string>
+    <string name="message_booking_excursion_succes">Заявка успешно отправлена</string>
 </resources>

@@ -1,8 +1,7 @@
 package com.example.GuideExpert.domain
 
-import com.example.GuideExpert.data.repository.UIResources
 import com.example.GuideExpert.domain.models.Avatar
-import com.example.GuideExpert.domain.models.ExcursionData
+import com.example.GuideExpert.domain.models.UIResources
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 

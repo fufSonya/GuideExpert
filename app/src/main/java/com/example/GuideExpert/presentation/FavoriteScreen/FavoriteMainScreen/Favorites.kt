@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
@@ -42,7 +45,7 @@ import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.RestoreF
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.RestoreFavoriteExcursionUIState
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.SetFavoriteExcursionState
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.SetFavoriteExcursionUIState
-import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.SnackbarEffect
+import com.example.GuideExpert.domain.models.SnackbarEffect
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.components.LoadingExcursionListShimmer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
@@ -188,11 +191,13 @@ fun FavoritesScope.FavoritesDataContent(innerPadding: PaddingValues,effectFlow: 
             isRefreshing = isRefreshing,
             onRefresh = {handleEvent(ExcursionsFavoriteUiEvent.OnLoadExcursionsFavorite)}
         ) {
-            LazyColumn(
+            LazyVerticalStaggeredGrid(
                 modifier = Modifier.padding(innerPadding)
                     .fillMaxSize(),
+                columns = StaggeredGridCells.Adaptive(300.dp),
                 contentPadding = PaddingValues(vertical = 8.dp),
-            ) {
+            )
+            {
                 itemsIndexed(
                     items = it,
                     key = { _, item -> item.id }

@@ -4,6 +4,10 @@ import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.VectorConverter
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
@@ -14,7 +18,12 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
+import androidx.compose.material3.pulltorefresh.PullToRefreshState
+import androidx.compose.material3.pulltorefresh.pullToRefresh
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,7 +47,9 @@ import com.example.GuideExpert.utils.Constant.STATUSBAR_HEIGHT
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
-@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterialApi::class,
+    ExperimentalMaterial3Api::class
+)
 @Composable
 fun HomeScreen(
     snackbarHostState: SnackbarHostState,
@@ -48,6 +59,8 @@ fun HomeScreen(
     //  viewModel: ExcursionsViewModel = hiltViewModel()
 ) {
 
+
+    val pullToRefreshState = rememberPullToRefreshState()
     val screenHeightDp =  LocalConfiguration.current.screenHeightDp
 
     var toolbarHeight by rememberSaveable { mutableStateOf(screenHeightDp) }
@@ -69,7 +82,7 @@ fun HomeScreen(
                 val delta = available.y
                 val newOffset = toolbarOffsetHeightPx + delta
                 if(isCantScrollingColumn) {scrollingColumn = false} else {scrollingColumn = true}
-                if (scrolling && scrollingColumn) toolbarOffsetHeightPx = newOffset.coerceIn(-(toolbarHeightPx+statusbarHeight), 0f)
+                if (scrolling && scrollingColumn && pullToRefreshState.distanceFraction == 0f) toolbarOffsetHeightPx = newOffset.coerceIn(-(toolbarHeightPx+statusbarHeight), 0f)
                 return Offset.Zero
             }
         }
@@ -79,21 +92,22 @@ fun HomeScreen(
         mutableStateOf(false)
     }
 
-
     val coroutineScope = rememberCoroutineScope()
     var isRefreshing by remember { mutableStateOf(false) }
-    val pullRefreshState = rememberPullRefreshState(
-        refreshing = isRefreshing,
+
+    val padding = if (filtersVisible)  innerPadding else if (scrolling) innerPadding  else PaddingValues(0.dp)
+    var defaultModifier = Modifier.padding(padding).fillMaxSize().nestedScroll(nestedScrollConnection)
+    if (!filtersVisible) defaultModifier =  defaultModifier.then(Modifier
+        .pullToRefresh(
+        state = pullToRefreshState,
+        isRefreshing = isRefreshing,
         onRefresh = {
             isRefreshing = true
-        }
-    )
+        }))
 
     SharedTransitionLayout {
-        Box(
-            if (!filtersVisible) Modifier.padding(innerPadding).fillMaxSize().pullRefresh(pullRefreshState).nestedScroll(nestedScrollConnection)
-            else Modifier.padding(innerPadding).fillMaxSize().nestedScroll(nestedScrollConnection)
-        ) {
+        Box(Modifier.then(defaultModifier))
+        {
 
             HomeScreenContent(
                 snackbarHostState = snackbarHostState,
@@ -149,10 +163,10 @@ fun HomeScreen(
                 }
             }
 
-            PullRefreshIndicator(
-                refreshing = isRefreshing,
-                state = pullRefreshState,
-                modifier = Modifier.align(Alignment.TopCenter)
+            PullToRefreshDefaults.Indicator(
+                modifier = Modifier.align(Alignment.TopCenter),
+                isRefreshing = isRefreshing,
+                state = pullToRefreshState,
             )
         }
     }

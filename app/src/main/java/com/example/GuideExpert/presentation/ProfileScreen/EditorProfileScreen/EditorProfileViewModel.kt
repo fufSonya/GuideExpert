@@ -15,12 +15,12 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.GuideExpert.data.repository.UIResources
 import com.example.GuideExpert.domain.DeleteAvatarProfileUseCase
 import com.example.GuideExpert.domain.UpdateAvatarProfileUseCase
 import com.example.GuideExpert.domain.UpdateProfileUseCase
+import com.example.GuideExpert.domain.models.UIResources
 import com.example.GuideExpert.domain.repository.ProfileRepository
-import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.SnackbarEffect
+import com.example.GuideExpert.domain.models.SnackbarEffect
 import com.example.GuideExpert.utils.getOrientation
 import com.example.GuideExpert.utils.rotateBitmap
 import dagger.hilt.android.lifecycle.HiltViewModel

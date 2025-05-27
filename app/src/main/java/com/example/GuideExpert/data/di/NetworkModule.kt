@@ -1,14 +1,15 @@
 package com.example.GuideExpert.data.di
 
-import com.example.GuideExpert.data.SessionManager
+import com.example.GuideExpert.data.remote.services.DataSourceService
+import com.example.GuideExpert.data.remote.services.ExcursionAuthService
 import com.example.GuideExpert.data.remote.services.ExcursionService
 import com.example.GuideExpert.data.remote.services.ProfileService
+import com.example.GuideExpert.domain.repository.SessionManager
 import com.example.GuideExpert.utils.Constant
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
@@ -65,6 +66,12 @@ object NetworkModule {
         return retrofit.create(ExcursionService::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideDataSourceService(@NoAuth retrofit: Retrofit): DataSourceService {
+        return retrofit.create(DataSourceService::class.java)
+    }
+
     //------------
     //------------
     //------------
@@ -107,4 +114,10 @@ object NetworkModule {
      fun provideUserService(@Auth retrofit: Retrofit): ProfileService {
          return retrofit.create(ProfileService::class.java)
      }
+
+    @Provides
+    @Singleton
+    fun provideExcursionAuthService(@Auth retrofit: Retrofit): ExcursionAuthService {
+        return retrofit.create(ExcursionAuthService::class.java)
+    }
 }

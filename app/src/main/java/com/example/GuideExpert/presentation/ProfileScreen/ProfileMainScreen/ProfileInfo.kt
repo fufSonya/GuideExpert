@@ -21,7 +21,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -61,9 +60,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.SubcomposeAsyncImage
 import com.example.GuideExpert.R
-import com.example.GuideExpert.data.repository.ProfileResources
 import com.example.GuideExpert.domain.models.Profile
-import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.SnackbarEffect
+import com.example.GuideExpert.domain.models.ProfileResources
+import com.example.GuideExpert.domain.models.SnackbarEffect
 import com.example.GuideExpert.ui.theme.Shadow1
 import com.example.GuideExpert.ui.theme.Shadow2
 import kotlinx.coroutines.flow.Flow

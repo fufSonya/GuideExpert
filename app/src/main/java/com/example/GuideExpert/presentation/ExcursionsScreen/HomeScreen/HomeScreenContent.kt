@@ -56,6 +56,7 @@ import com.example.GuideExpert.domain.models.Excursion
 import com.example.GuideExpert.domain.models.ExcursionFavorite
 import com.example.GuideExpert.domain.models.Filter
 import com.example.GuideExpert.domain.models.Profile
+import com.example.GuideExpert.domain.models.SnackbarEffect
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.components.ColumnExcursionShimmer
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.components.FilterBar
 import com.example.GuideExpert.presentation.ExcursionsScreen.HomeScreen.components.FilterItem

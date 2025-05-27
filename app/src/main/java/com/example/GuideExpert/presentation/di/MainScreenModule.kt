@@ -1,5 +1,6 @@
 package com.example.GuideExpert.presentation.di
 
+import com.example.GuideExpert.domain.BookingExcursionUseCase
 import com.example.GuideExpert.domain.DeleteAvatarProfileUseCase
 import com.example.GuideExpert.domain.DeleteFavoriteExcursionUseCase
 import com.example.GuideExpert.domain.GetAuthTokenByYandexUseCase
@@ -25,6 +26,7 @@ import com.example.GuideExpert.domain.RestoreFavoriteExcursionUseCase
 import com.example.GuideExpert.domain.SetFavoriteExcursionUseCase
 import com.example.GuideExpert.domain.UpdateAvatarProfileUseCase
 import com.example.GuideExpert.domain.UpdateProfileUseCase
+import com.example.GuideExpert.domain.impl.BookingExcursionUseCaseImpl
 import com.example.GuideExpert.domain.impl.DeleteAvatarProfileUseCaseImpl
 import com.example.GuideExpert.domain.impl.DeleteFavoriteExcursionUseCaseImpl
 import com.example.GuideExpert.domain.impl.GetAuthTokenByYandexUseCaseImpl
@@ -204,4 +206,10 @@ abstract class MainScreenModule {
     abstract fun bindRestoreFavoriteExcursionUseCase(
         restoreFavoriteExcursionUseCaseImpl: RestoreFavoriteExcursionUseCaseImpl
     ) : RestoreFavoriteExcursionUseCase
+
+    @ViewModelScoped
+    @Binds
+    abstract fun bindBookingExcursionUseCase(
+        bookingExcursionUseCaseImpl: BookingExcursionUseCaseImpl
+    ) : BookingExcursionUseCase
 }

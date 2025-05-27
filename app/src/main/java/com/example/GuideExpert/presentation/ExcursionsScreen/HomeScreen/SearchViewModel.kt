@@ -5,12 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.GuideExpert.data.repository.UIResources
 import com.example.GuideExpert.domain.DeleteFavoriteExcursionUseCase
 import com.example.GuideExpert.domain.GetExcursionByQueryUseCase
 import com.example.GuideExpert.domain.SetFavoriteExcursionUseCase
 import com.example.GuideExpert.domain.models.Excursion
 import com.example.GuideExpert.domain.models.FilterQuery
+import com.example.GuideExpert.domain.models.SnackbarEffect
+import com.example.GuideExpert.domain.models.UIResources
+import com.example.GuideExpert.domain.repository.ExcursionsRepository
 import com.example.GuideExpert.domain.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -72,12 +74,13 @@ sealed interface SearchEvent {
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     val getExcursionByQueryUseCase: GetExcursionByQueryUseCase,
-    private val profileRepository: ProfileRepository,
+    profileRepository: ProfileRepository,
+    excursionsRepository: ExcursionsRepository,
     private val state: SavedStateHandle,
     val setFavoriteExcursionUseCase: SetFavoriteExcursionUseCase,
     val deleteFavoriteExcursionUseCase: DeleteFavoriteExcursionUseCase
 ) : ViewModel() {
-    val profileFavoriteExcursionIdFlow = profileRepository.profileFavoriteExcursionIdFlow
+    val profileFavoriteExcursionIdFlow = excursionsRepository.profileFavoriteExcursionIdFlow
     val profileFlow = profileRepository.profileFlow
 
     private val _uiPagingState = MutableStateFlow<PagingData<Excursion>>(PagingData.empty())

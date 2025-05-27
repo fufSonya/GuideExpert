@@ -1,8 +1,6 @@
 package com.example.GuideExpert.domain.impl
 
 import com.example.GuideExpert.domain.GetProfileUseCase
-import com.example.GuideExpert.domain.GetSortDefaultUseCase
-import com.example.GuideExpert.domain.repository.DataProviderRepository
 import com.example.GuideExpert.domain.repository.ProfileRepository
 import javax.inject.Inject
 

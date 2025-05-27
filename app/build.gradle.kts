@@ -75,6 +75,8 @@ composeCompiler {
 
 dependencies {
 
+    implementation("androidx.compose.material3:material3-adaptive-navigation-suite")
+
     implementation ("androidx.exifinterface:exifinterface:1.4.1")
     implementation ("androidx.datastore:datastore-preferences:1.1.0")
 
